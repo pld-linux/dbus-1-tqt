@@ -1,8 +1,12 @@
+#
+# Conditional build:
+%bcond_with		qt3     # Build with Qt3 instead TQt3
+
 %define	tde_ver	R14.0.0
 Summary:	DBus bindings for the Trinity Qt interface
 Name:		dbus-1-tqt
 Version:	0.9
-Release:	0.1
+Release:	0.2
 # AFL v2.1 or GPL v2+, but Qt license enforces GPL
 License:	GPL v2+
 Group:		Libraries
@@ -14,7 +18,13 @@ BuildRequires:	cmake >= 2.8
 BuildRequires:	dbus-devel >= 0.91
 BuildRequires:	libstdc++-devel
 BuildRequires:	pkgconfig
+%if %{with qt3}
 BuildRequires:	qt-devel >= 6:3.1.0
+%else
+BuildRequires:	libtqt3-mt-devel >= 3.5.0
+BuildRequires:	tqt3-dev-tools >= 3.5.0
+BuildConflicts:	qt-devel
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,7 +63,9 @@ Statyczna biblioteka do używania D-BUS oparta o Qt.
 %prep
 %setup -qc
 mv dependencies/dbus-1-tqt/* .
+%if %{with qt3}
 %patch0 -p1
+%endif
 
 %build
 install -d build
