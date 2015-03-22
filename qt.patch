@@ -1,0 +1,13 @@
+build with qt3, not tqt3
+
+--- dbus-1-tqt-R14.0.0/tqdbusunixfd.h~	2013-11-19 03:30:25.000000000 +0200
++++ dbus-1-tqt-R14.0.0/tqdbusunixfd.h	2015-03-21 14:24:10.493946492 +0200
+@@ -26,7 +26,7 @@
+ 
+ #include "dbus/dbus.h"
+ #ifndef QT_H
+-#include "ntqshared.h"
++#include "qshared.h"
+ #endif // QT_H
+ 
+ 
